@@ -20,8 +20,9 @@ exports.addComment = async (req, res) => {
 exports.getComments = async (req, res) => {
   try {
     const tourId = req.params.tourId;
+    // Thêm tên user ở chỗ comment 
     const [rows] = await pool.query(`
-        SELECT * FROM REVIEWS`
+        SELECT * FROM REVIEWS JOIN CUSTOMERS ON REVIEWS.CUSTOMER_ID = CUSTOMERS.customer_id`
     );
     res.json(rows);
   } catch (e) {
